@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<html>
+<h:head>
+	<title>Contacto</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:panel header="CRUD Contacto">
+			<h:panelGrid columns="2">
+
+				<h:outputLabel>Identificador</h:outputLabel>
+				<p:inputText id="Identificador" required="true"
+					value="#{contactoBean.identificador}"></p:inputText>
+
+				<h:outputLabel>Nombre</h:outputLabel>
+				<p:inputText id="Nombre" required="true"
+					value="#{contactoBean.nombre}"></p:inputText>
+
+				<h:outputLabel>Apellido</h:outputLabel>
+				<p:inputText id="Apellido" required="true"
+					value="#{contactoBean.apellido}"></p:inputText>
+
+				<h:outputLabel>Numero</h:outputLabel>
+				<p:inputText id="Numero" required="true"
+					value="#{contactoBean.numero}"></p:inputText>
+
+				<p:selectOneMenu id="operaciones"
+					value="#{contactoBean.ejecutarOperacion}" style="width:125px">
+					<f:selectItem itemLabel="Registrar" itemValue="Registrar" />
+					<f:selectItem itemLabel="Eliminar" itemValue="Eliminar" />
+					<f:selectItem itemLabel="Actualizar" itemValue="Actualizar" />
+				</p:selectOneMenu>
+
+				<p:commandButton id="Ejecutar" value="Ejecutar"
+					actionListener="#{contactoBean.ejecutar}"
+					update="growl tablaContactos">
+
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+
+	</h:form>
+
+	<p:panel header="Contactos Registrados">
+		<h:panelGrid columns="4">
+			<p:dataTable id="tablaContactos" var="contacto"
+				value="#{contactoBean.contactos}">
+				<p:column headerText="Identificador">
+					<h:outputText value="#{contacto.identificador}" />
+				</p:column>
+
+				<p:column headerText="Nombre">
+					<h:outputText value="#{contacto.nombre}" />
+				</p:column>
+
+				<p:column headerText="Apellido">
+					<h:outputText value="#{contacto.apellido}" />
+				</p:column>
+
+				<p:column headerText="Numero">
+					<h:outputText value="#{contacto.numero}" />
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+	</p:panel>
+</h:body>
+	</html>
+</f:view>
